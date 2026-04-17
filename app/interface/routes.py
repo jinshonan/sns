@@ -11,9 +11,17 @@ main_bp = Blueprint(
 
 @main_bp.route("/")
 def hello():
-    return "Hello World"
+    return "Bye Bye World"
 
 @main_bp.route("/index")
 def index():
     # template_folderを指定しているので、ファイル名だけでOK
     return render_template("index.html")
+
+@main_bp.route("/ideas")
+def ideas():
+    return render_template("ideas.html")
+
+@main_bp.route("/login", methods=["GET", "POST"])
+def login():
+    return render_template("login.html")

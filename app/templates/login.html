@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login | Idea Hub</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    <script defer src="{{ url_for('static', filename='js/main.js') }}"></script>
+</head>
+<body>
+
+<div class="container">
+    <div class="left-panel">
+        <h1>💡Idea Hub</h1>
+        <p>Share, inspire, and improve together.</p>
+    </div>
+
+    <div class="right-panel">
+        <form method="POST" action="{{ url_for('main.login') }}" class="login-form">
+            <h2>Welcome Back</h2>
+
+            {% with messages = get_flashed_messages() %}
+              {% if messages %}
+                <div class="flash">
+                    {{ messages[0] }}
+                </div>
+              {% endif %}
+            {% endwith %}
+
+            <div class="input-group">
+                <input type="text" name="username" required>
+                <label>Username</label>
+            </div>
+
+            <div class="input-group">
+                <input type="password" name="password" required>
+                <label>Password</label>
+            </div>
+
+            <button type="submit">Login</button>
+        </form>
+    </div>
+</div>
+
+</body>
+</html>

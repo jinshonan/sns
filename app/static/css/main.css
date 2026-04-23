@@ -6,8 +6,18 @@
 }
 
 body {
-    height: 100vh;
+    margin: 0;
+    min-height: 100vh;
     background: linear-gradient(135deg, #ff7a18, #32d2aa);
+}
+
+.page-ideas {
+    display: block;
+    height: auto;
+}
+
+.page-login {
+    height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -128,4 +138,120 @@ button:hover {
     color: #ff512f;
     text-decoration: none;
     font-weight: bold;
+}
+
+/* Container */
+.ideas-container {
+    padding: 30px;
+    max-width: 1000px;
+    margin: auto;
+}
+
+/* Header */
+.ideas-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.ideas-header h1 {
+    color: #ff512f;
+}
+
+/* Buttons */
+.btn {
+    padding: 10px 15px;
+    border-radius: 20px;
+    text-decoration: none;
+    color: white;
+    font-size: 14px;
+    margin-left: 10px;
+    transition: 0.3s;
+}
+
+.create-btn {
+    background: linear-gradient(135deg, #32d2aa, #00c6ff);
+}
+
+.logout-btn {
+    background: linear-gradient(135deg, #ff512f, #dd2476);
+}
+
+.btn:hover {
+    opacity: 0.85;
+}
+
+/* Sort bar */
+.sort-bar {
+    margin-bottom: 20px;
+}
+
+.sort-bar select {
+    padding: 5px;
+    border-radius: 5px;
+}
+
+/* Idea cards */
+.idea-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.idea-card {
+    background: white;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    transition: 0.2s;
+}
+
+.idea-card:hover {
+    transform: translateY(-3px);
+}
+
+/* Card header */
+.idea-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.likes {
+    font-weight: bold;
+    color: #dd2476;
+}
+
+/* Description */
+.idea-description {
+    margin: 10px 0;
+    color: #555;
+}
+
+/* Footer */
+.idea-footer {
+    font-size: 12px;
+    color: #888;
+}
+
+/* Navbar */
+.navbar {
+    width: 100%;
+    padding: 15px 30px;
+    background: linear-gradient(135deg, #ff512f, #dd2476);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+.navbar h1 {
+    font-size: 22px;
+}
+
+.nav-right {
+    display: flex;
+    align-items: center;
 }

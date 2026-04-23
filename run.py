@@ -1,9 +1,11 @@
+# app.py
+
 from flask import Flask
 from dotenv import load_dotenv
 import os
 
 from app.interface.routes import main_bp
-from app.infrastructure.database import init_db
+from app.infrastructure.database import init_db, migrate  # migrateをインポート
 
 load_dotenv()  # .envを読み込む
 
@@ -18,13 +20,11 @@ def create_app():
 
     # DB初期化
     init_db(app)
-
-    # Blueprint登録（既存）
-    # from app.interface.routes import main
     app.register_blueprint(main_bp)
 
     return app
 
+app = create_app()
+
 if __name__ == '__main__':
-    app = create_app()
     app.run(debug=True)

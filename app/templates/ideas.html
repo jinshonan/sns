@@ -1,8 +1,64 @@
 <!DOCTYPE html>
-<html>
-    <head>
-    </head>
-    <body>
-    <h1>BYE</h1>
-    </body>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Ideas | Idea Hub</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    <script defer src="{{ url_for('static', filename='js/main.js') }}"></script>
+</head>
+<body class="page-ideas">
+
+<!-- Navigation Bar -->
+<nav class="navbar">
+    <div class="nav-left">
+        <h1>💡 Idea Hub</h1>
+    </div>
+
+    <div class="nav-right">
+        <a href="{{ url_for('main.create_idea') }}" class="btn create-btn">+ New Idea</a>
+        <a href="{{ url_for('main.login') }}" class="btn logout-btn">Logout</a>
+    </div>
+</nav>
+
+<div class="ideas-container">
+
+    <!-- Sort Controls -->
+    <div class="sort-bar">
+        <label for="sort">Sort by:</label>
+        <select id="sort">
+            <option value="new">Newest</option>
+            <option value="likes">Most Liked</option>
+        </select>
+    </div>
+
+    <!-- Idea List -->
+    <div id="idea-list" class="idea-list">
+
+        {% for idea in ideas %}
+        <div class="idea-card"
+             data-likes="{{ idea.likes }}"
+             data-date="{{ idea.created_at.timestamp() if idea.created_at else 0 }}">
+
+            <div class="idea-header">
+                <h3>{{ idea.title }}</h3>
+                <span class="likes">❤️ {{ idea.likes }}</span>
+            </div>
+
+            <p class="idea-description">
+                {{ idea.description }}
+            </p>
+
+            <div class="idea-footer">
+                <span class="date">
+                    {{ idea.created_at.strftime('%Y-%m-%d %H:%M') if idea.created_at else '' }}
+                </span>
+            </div>
+        </div>
+        {% endfor %}
+
+    </div>
+
+</div>
+
+</body>
 </html>

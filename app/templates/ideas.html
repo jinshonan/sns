@@ -16,6 +16,7 @@
 
     <div class="nav-right">
         <a href="{{ url_for('main.create_idea') }}" class="btn create-btn">+ New Idea</a>
+        <a href="{{ url_for('main.my_ideas') }}" class="btn create-btn">My Ideas</a>
         <a href="{{ url_for('main.login') }}" class="btn logout-btn">Logout</a>
     </div>
 </nav>
@@ -41,11 +42,21 @@
 
             <div class="idea-header">
                 <h3>{{ idea.title }}</h3>
-                <span class="likes">❤️ {{ idea.likes }}</span>
+
+                <form method="POST" action="{{ url_for('main.toggle_like', idea_id=idea.id) }}">
+                    <button type="submit" class="like-btn">
+                        {% if current_user.is_authenticated and idea in current_user.liked_ideas %}
+                            ❤️
+                        {% else %}
+                            🤍
+                        {% endif %}
+                        {{ idea.liked_by_users.count() }}
+                    </button>
+                </form>
             </div>
 
             <p class="idea-description">
-                {{ idea.description }}
+                {{ idea.content }}
             </p>
 
             <div class="idea-footer">
@@ -55,6 +66,24 @@
             </div>
         </div>
         {% endfor %}
+
+        <div class="pagination">
+
+            {% if pagination.has_prev %}
+                <a href="{{ url_for('main.ideas', page=pagination.prev_num) }}">
+                    ← Previous
+                </a>
+            {% endif %}
+
+            <span>Page {{ pagination.page }} / {{ pagination.pages }}</span>
+
+            {% if pagination.has_next %}
+                <a href="{{ url_for('main.ideas', page=pagination.next_num) }}">
+                    Next →
+                </a>
+            {% endif %}
+
+        </div>
 
     </div>
 

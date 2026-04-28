@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My Ideas | Idea Hub</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    <script defer src="{{ url_for('static', filename='js/main.js') }}"></script>
+</head>
+<body class="page-ideas">
+
+<!-- Navbar -->
+<nav class="navbar">
+    <div class="nav-left">
+        <h1>💡 Idea Hub</h1>
+    </div>
+
+    <div class="nav-right">
+        <a href="{{ url_for('main.ideas') }}" class="btn create-btn">All Ideas</a>
+        <a href="{{ url_for('main.create_idea') }}" class="btn create-btn">+ New Idea</a>
+        <a href="{{ url_for('main.login') }}" class="btn logout-btn">Logout</a>
+    </div>
+</nav>
+
+<div class="ideas-container">
+
+    <h2 style="margin-bottom: 20px;">My Ideas</h2>
+
+    <!-- Idea List -->
+    <div class="idea-list">
+        {% for idea in ideas %}
+        <div class="idea-card">
+            <div class="idea-header">
+                <h3>{{ idea.title }}</h3>
+                <span class="likes">❤️ {{ idea.liked_by_users.count() }}</span>
+            </div>
+
+            <p class="idea-description">
+                {{ idea.content }}
+            </p>
+
+            <div class="idea-footer">
+                <span class="date">
+                    {{ idea.created_at.strftime('%Y-%m-%d %H:%M') if idea.created_at else '' }}
+                </span>
+
+                <div class="idea-actions">
+                    <!-- Edit -->
+                    <a href="{{ url_for('main.edit_idea', idea_id=idea.id) }}" 
+                    class="icon-btn edit-btn" 
+                    title="Edit">
+                        ✏️
+                    </a>
+
+                    <!-- Delete -->
+                    <form method="POST" 
+                        action="{{ url_for('main.delete_idea', idea_id=idea.id) }}" 
+                        class="icon-form">
+                        <button type="submit" 
+                                class="icon-btn delete-btn"
+                                title="Delete"
+                                onclick="return confirm('Delete this idea?');">
+                            ❌
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <!-- Pagination -->
+    <div class="pagination" style="margin-top: 20px;">
+        {% if pagination.has_prev %}
+            <a href="{{ url_for('main.my_ideas', page=pagination.prev_num) }}">← Prev</a>
+        {% endif %}
+
+        <span style="margin: 0 10px;">
+            Page {{ pagination.page }} / {{ pagination.pages }}
+        </span>
+
+        {% if pagination.has_next %}
+            <a href="{{ url_for('main.my_ideas', page=pagination.next_num) }}">Next →</a>
+        {% endif %}
+    </div>
+
+</div>
+
+</body>
+</html>

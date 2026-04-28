@@ -1,7 +1,8 @@
 # app\domain\models.py
-
 from app.infrastructure.database import db
 from datetime import datetime, timezone
+from flask_login import UserMixin
+
 
 # --- 1. 中間テーブル (Association Table) の定義 ---
 # 特定のクラスに属さない「テーブル」として定義するのが一般的です
@@ -11,7 +12,8 @@ idea_likes = db.Table('idea_likes',
     db.Column('created_at', db.DateTime, default=lambda: datetime.now(timezone.utc))
 )
 
-class User(db.Model):
+
+class User(db.Model, UserMixin):
     __tablename__ = 'users'
 
     id = db.Column(db.Integer, primary_key=True)

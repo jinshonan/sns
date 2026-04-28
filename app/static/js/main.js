@@ -41,3 +41,18 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 });
+
+
+document.addEventListener("DOMContentLoaded", () => {
+    document.querySelectorAll(".like-btn").forEach(btn => {
+        btn.addEventListener("click", (e) => {
+            e.preventDefault();
+
+            const form = btn.closest("form");
+
+            fetch(form.action, {
+                method: "POST"
+            }).then(() => location.reload());
+        });
+    });
+});
